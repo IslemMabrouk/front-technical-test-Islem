@@ -1,0 +1,48 @@
+import {
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+	ChangeDetectionStrategy,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FileItem } from '../../models/file-item';
+
+@Component({
+	selector: 'app-breadcrumb',
+	standalone: true,
+	imports: [CommonModule],
+	changeDetection: ChangeDetectionStrategy.OnPush, // 🚀 Performance optimization
+	template: `
+		<nav class="breadcrumb-container" aria-label="Folder navigation">
+			<ol class="breadcrumb-list">
+				<li class="breadcrumb-item">
+					<button
+						class="breadcrumb-link"
+						(click)="navigate.emit(null)"
+						type="button">
+						<span class="material-symbols-outlined breadcrumb-home-icon">home</span>
+						<span class="breadcrumb-text">My Files</span>
+					</button>
+				</li>
+
+				@for (item of path; track item.id) {
+					<li class="breadcrumb-item">
+						<span class="breadcrumb-separator material-symbols-outlined">chevron_right</span>
+						<button
+							class="breadcrumb-link"
+							(click)="navigate.emit(item.id)"
+							type="button">
+							<span class="breadcrumb-text">{{ item.name }}</span>
+						</button>
+					</li>
+				}
+			</ol>
+		</nav>
+	`,
+	styleUrls: ['./breadcrumb.component.scss'],
+})
+export class BreadcrumbComponent {
+	@Input() path: FileItem[] = [];
+	@Output() navigate = new EventEmitter<string | null>();
+}
