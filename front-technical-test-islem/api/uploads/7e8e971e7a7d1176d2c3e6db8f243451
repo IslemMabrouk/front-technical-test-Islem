@@ -1,0 +1,45 @@
+Projet Angular
+Introduction
+Ce document présente un projet Angular basé sur le découpage des sections du site, avec une interface d’accueil et deux pages "WHO ARE WE 1" et "WHO ARE WE 2" vides.
+Structure du Projet
+Le projet se compose des composants suivants :
+1. Composants Principale HomeComponent :
+C'est l'interface d’accueil du site. Il contient des liens vers les pages (what we do, choose us, solutions..) et les pages vides (WhoAreWe1Component et WhoAreWe2Component ).
+2. WhoAreWe1Component et WhoAreWe2Component :
+Ce sont deux pages vides, à l'exception de l'ajout d'un titre et d'un message explicatif indiquant qu'elles sont encore en développement ou sont "This is a blank page for WHO ARE WE ".
+3. Configuration du Routage :
+Le routage dans Angular permet de naviguer entre les différentes pages de l'application. 
+4. Optimisation pour le Référencement Naturel (SEO) :
+ Utilisation de Meta Tags Dynamiques
+Pour chaque page, des meta tags sont utilisés pour définir des titres, descriptions, et mots-clés qui aident à optimiser le référencement naturel. Par exemple, sur la page d'accueil :
+typescript
+Copier
+import { Meta } from '@angular/platform-browser';
+constructor(private meta: Meta) {
+  this.meta.updateTag({ name: 'description', content: 'Description de la page d\'accueil' });
+}
+ Amélioration de la Vitesse du Site
+La vitesse de chargement du site est un facteur clé pour le SEO. L’application Angular utilise la fonctionnalité de Lazy Loading pour ne charger que les modules nécessaires, ce qui permet de réduire la taille initiale du fichier.
+
+5. Hébergement et Suivi de l'Utilisation :
+Hébergement sur un Serveur OVH
+Le site Angular a été déployé sur un serveur VPS OVH après avoir été compilé avec la commande suivante :
+bash
+Copier
+ng build --prod
+Cela génère un dossier dist/ contenant les fichiers statiques du projet. Ces fichiers sont ensuite téléchargés sur le serveur via FTP ou SSH.
+Suivi de l'Utilisation du Site
+Le site utilise Google Analytics pour suivre l'activité des utilisateurs. Le script de suivi a été intégré dans le fichier index.html :
+html
+Copier
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-XXXXXXXXX-X');
+</script>
+Cela permet de suivre les pages visitées, la durée des sessions, et d'autres informations utiles pour analyser le comportement des utilisateurs.
+
+Conclusion
+Ce projet démontre la création d'une application Angular simple mais fonctionnelle avec une structure claire. Le site est prêt à être étendu et amélioré en fonction des besoins futurs.
